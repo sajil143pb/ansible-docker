@@ -23,15 +23,17 @@
       name: " {{ user }} "
       group: docker
       append: yes
+
   - name: "REstarting and enabling docker service"
     service:
        name: docker
        state: restarted
        enabled: true
+
   - name: "build image"
     docker_image:
       build:
-      path: ./
+        path: ./
       name: "{{ image_name }}"
       tag: "{{ item }}"
       source: build
@@ -39,6 +41,7 @@
     with items:
       - "{{ version }}" 
       - latest
+
   - name: "Adding a httpd container"
     docker_container:
       name: httpd-container1
