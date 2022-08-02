@@ -27,8 +27,12 @@
     service:
        name: docker
        state: restarted
+<<<<<<< HEAD
        enabled: yes
 
+=======
+       enable: yes
+>>>>>>> 99118a7d3877eeecd08ac892f5c0cbdb2cbc654b
   - name: "build image"
     docker_image:
       build:

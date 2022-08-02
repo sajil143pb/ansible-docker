@@ -2,6 +2,10 @@
   "ExpandedNodes": [
     ""
   ],
+<<<<<<< HEAD
   "SelectedNode": "\\C:\\Users\\sajil pb\\Source\\Repos\\ansible-docker",
+=======
+  "SelectedNode": "\\.docker.yaml.swp",
+>>>>>>> 99118a7d3877eeecd08ac892f5c0cbdb2cbc654b
   "PreviewInSolutionExplorer": false
 }
