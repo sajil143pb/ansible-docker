@@ -11,7 +11,7 @@
     image_name: "app"
   tasks: 
   - name: "Install Docker"
-    apt:
+    yum:
       name: "{{ package }}"
       state: present
   - name: "Installing docker client for python"
