@@ -1,0 +1,52 @@
+---
+- name: "Installing docker image using ansible"
+  hosts: localhost
+  become: true
+  vars:
+    packages:
+      - docker
+      - python2-pip
+    user: docker
+    version: 1
+    image_name: "app"
+  tasks: 
+  - name: "Install Docker"
+    yum:
+      name: "{{ package }}"
+      state: present
+  - name: "Installing docker client for python"
+    pip:
+      name: docker-py
+      state: present
+  - name: "Adding user {{ user }} to the group docker"
+    user:
+      name: " {{ user }} "
+      group: docker
+      append: yes
+  - name: "REstarting and enabling docker service"
+    service:
+       name: docker
+       state: restarted
+       enables: yes
+  - name: "build image"
+    docker_image:
+      build:
+      path: ./
+      name: "{{ image_name }}"
+      tag: "{{ item }}"
+      source: build
+      push: yes
+    with items:
+      - "{{ version }}" 
+      - latest
+  - name: "Adding a httpd container"
+    docker_container:
+      name: httpd-container1
+      image: "{{image_name}}:{{ version }}"
+      recreate: true
+      state: started
+      ports:
+          - "80:80"
+     
+
+   
