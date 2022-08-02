@@ -34,13 +34,11 @@
     docker_image:
       build:
         path: /
-        name: "{{ image_name }}"
-        tag: "{{ item }}"
-        source: build
-        push: yes
-    with items:
-      - "{{ version }}" 
-      - latest
+      name: "{{ image_name }}"
+      tag: "{{ item }}"
+      source: build
+      push: yes
+   
 
   - name: "Adding a httpd container"
     docker_container:
