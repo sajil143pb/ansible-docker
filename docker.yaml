@@ -27,7 +27,8 @@
     service:
        name: docker
        state: restarted
-       enables: yes
+       enabled: yes
+
   - name: "build image"
     docker_image:
       build:
