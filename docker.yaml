@@ -33,11 +33,11 @@
   - name: "build image"
     docker_image:
       build:
-        path: ./
-      name: "{{ image_name }}"
-      tag: "{{ item }}"
-      source: build
-      push: yes
+        path: /
+        name: "{{ image_name }}"
+        tag: "{{ item }}"
+        source: build
+        push: yes
     with items:
       - "{{ version }}" 
       - latest
