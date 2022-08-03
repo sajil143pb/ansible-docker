@@ -5,7 +5,7 @@
   vars:
     packages:
       - docker
-      - python2-pip
+      - python-pip
     user: docker
     version: 1
     image_name: "app"
