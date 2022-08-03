@@ -45,9 +45,9 @@
     
     - name: start and enable docker
       service:
-        - name: docker
-          state: restarted
-          enabled: true
+         name: docker
+         state: restarted
+         enabled: true
 
 
     - name: build image
