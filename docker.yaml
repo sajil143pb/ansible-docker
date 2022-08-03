@@ -1,57 +1,70 @@
 ---
-- name: "Installing docker image using ansible"
-  hosts: localhost
+- hosts: all
   become: true
   vars:
-    packages:
-      - docker
-      - python2-pip
-    user: docker
-    version: 1
-    image_name: "app"
-  tasks: 
-  - name: "Install Docker"
-    yum:
-      name: "{{ package }}"
-      state: present
-  - name: "Installing docker client for python"
-    pip:
-      name: docker-py
-      state: present
-  - name: "Adding user {{ user }} to the group docker"
-    user:
-      name: " {{ user }} "
-      group: docker
-      append: yes
-  - name: "REstarting and enabling docker service"
-    service:
-       name: docker
-       state: restarted
-<<<<<<< HEAD
-       enabled: yes
+    
+  tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+    
+    - name: install required system pacakges
+      apt:
+         pkg:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+         state: latest
+         update_cache: true
 
-=======
-       enable: yes
->>>>>>> 99118a7d3877eeecd08ac892f5c0cbdb2cbc654b
-  - name: "build image"
-    docker_image:
-      build:
-      path: ./
-      name: "{{ image_name }}"
-      tag: "{{ item }}"
-      source: build
-      push: yes
-    with items:
-      - "{{ version }}" 
-      - latest
-  - name: "Adding a httpd container"
-    docker_container:
-      name: httpd-container1
-      image: "{{image_name}}:{{ version }}"
-      recreate: true
-      state: started
-      ports:
-          - "80:80"
-     
-
+    - name: Add docker GPG apt key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
    
+    - name: add docker repo
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt:
+        name: docker-ce
+        state: latest
+        update_cache: true
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: build image
+      docker_image:
+        build:
+         path: ./
+         name: sajil143pb/vprofileweb
+         source: build
+         push: yes
+    
+    - name: login to  Dockerhub
+      docker_login:
+         username: "sajil143pb"
+         password: "dckr_pat_OMEFAeUcdcApU0dmvY7V46V4Exc"
+
+    - name: "Adding a httpd container" 
+      docker_container:
+        name: httpd-container1
+        image: ajil143pb/vprofileweb
+        recreate: true
+        state: started
+        ports:
+          - "80:80"      
+    
+
+
+
