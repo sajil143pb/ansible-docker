@@ -52,7 +52,7 @@
 
     - name: build image
       docker_image:
-        build:
+         build:
          path: ./
          name: sajil143pb/vprofileweb
          source: build
