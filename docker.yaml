@@ -12,7 +12,7 @@
   tasks: 
   - name: "Install Docker"
     yum:
-      name: "{{ package }}"
+      name: "{{ packages }}"
       state: present
   - name: "Installing docker client for python"
     pip:
