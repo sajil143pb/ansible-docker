@@ -42,6 +42,13 @@
     - name: Install Docker Module for Python
       pip:
         name: docker
+    
+    - name: start and enable docker
+      service:
+        - name: docker
+          state: restarted
+          enabled: true
+
 
     - name: build image
       docker_image:
