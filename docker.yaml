@@ -18,11 +18,7 @@
     pip:
       name: docker-py
       state: present
-  - name: "Adding user {{ user }} to the group docker"
-    user:
-      name: " {{ user }} "
-      groups: docker
-      append: yes
+  
 
   - name: "REstarting and enabling docker service"
     service:
