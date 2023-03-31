@@ -1,0 +1,2 @@
+Agile follows an iterative process where projects are divided into sprints of a shorter span. 
+Unlike the traditional approach, less time is spent on upfront planning and prioritization as agile is more flexible in changes and specifications developments.
